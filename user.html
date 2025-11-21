@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard UMKM - Pajakku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        accent: '#facc15',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(100%);
+            transition: opacity 300ms, transform 300ms;
+        }
+        .modal-leave {
+            opacity: 1;
+            transform: scale(100%);
+        }
+        .modal-leave-active {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 200ms, transform 200ms;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 flex flex-col min-h-screen relative">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-10 w-auto" src="img/logo.png" alt="Logo Pajakku">
+                    <span class="ml-3 font-bold text-xl text-primary hidden sm:block">Pajakku</span>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="ml-3 relative">
+                        <div>
+                            <button type="button" onclick="toggleProfile()" class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                <span class="sr-only">Buka menu user</span>
+                                <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+                                    UK
+                                </div>
+                                <span class="hidden md:block ml-2 self-center text-gray-700 font-medium">UMKM King</span>
+                                <svg class="ml-1 h-5 w-5 text-gray-400 self-center" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div id="profile-dropdown" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <div class="px-4 py-2 border-b text-sm text-gray-700">
+                                <p class="font-bold">Toko Kopi King</p>
+                                <p class="text-xs text-gray-500">ID: 12345678</p>
+                            </div>
+                            <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-red-600">
+                                Keluar / Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
+        
+        <div class="bg-white overflow-hidden shadow rounded-lg border-t-4 border-primary">
+            <div class="px-4 py-5 sm:p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
+                        <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <div class="ml-5 w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Informasi Usaha</h3>
+                        <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
+                            <div class="bg-gray-50 px-4 py-2 rounded-md border border-gray-200">
+                                <dt class="text-xs font-medium text-gray-500 uppercase">Nama Toko</dt>
+                                <dd class="mt-1 text-sm font-bold text-gray-900">Toko Kopi King Sejahtera</dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-2 rounded-md border border-gray-200">
+                                <dt class="text-xs font-medium text-gray-500 uppercase">Nama Pemilik</dt>
+                                <dd class="mt-1 text-sm font-bold text-gray-900">King Owner</dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-2 rounded-md border border-gray-200">
+                                <dt class="text-xs font-medium text-gray-500 uppercase">ID UMKM / NPWP</dt>
+                                <dd class="mt-1 text-sm font-bold text-primary tracking-wider">12.345.678.9-000.000</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <dt class="text-sm font-medium text-gray-500 truncate">Pendapatan Bulan Lalu (Oktober)</dt>
+                    <dd class="mt-1 text-3xl font-semibold text-gray-900">Rp 15.000.000</dd>
+                    <p class="mt-2 text-sm text-green-600"><span class="font-bold">Sudah Dilaporkan ✅</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg border-l-4 border-red-500">
+                <div class="px-4 py-5 sm:p-6 relative">
+                    <dt class="text-sm font-medium text-gray-500 truncate">Total Pajak Terutang (Harus Dibayar)</dt>
+                    <dd class="mt-1 text-3xl font-bold text-red-600">Rp 75.000</dd>
+                    <div class="mt-4">
+                        <button onclick="togglePaymentModal()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-blue-900 bg-accent hover:bg-yellow-300 focus:outline-none transition duration-150 ease-in-out transform active:scale-95">
+                            Bayar Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="bg-primary px-4 py-4 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-white">📝 Lapor Pendapatan Baru</h3>
+            </div>
+            <div class="px-4 py-5 sm:p-6 bg-blue-50">
+                <form class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 items-end">
+                    <div class="sm:col-span-2">
+                        <label for="bulan" class="block text-sm font-medium text-gray-700">Bulan</label>
+                        <select id="bulan" name="bulan" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                            <option>November 2025</option>
+                            <option>Desember 2025</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="revenue" class="block text-sm font-medium text-gray-700">Total Omset (Rp)</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm">Rp</span>
+                            </div>
+                            <input type="number" name="revenue" id="revenue" class="focus:ring-primary focus:border-primary block w-full pl-12 sm:text-sm border-gray-300 rounded-md py-2" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <button type="button" onclick="alert('Data berhasil disimpan! Pajak otomatis terhitung.')" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-red-600">Tagihan Pajak (Belum Lunas)</h3>
+                </div>
+                <ul class="divide-y divide-gray-200">
+                    <li class="px-4 py-4 sm:px-6 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-primary truncate">Pajak Masa Oktober 2025</p>
+                                <p class="text-sm text-gray-500">Omset: Rp 15.000.000</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-gray-900">Rp 75.000</p>
+                                <button onclick="togglePaymentModal()" class="mt-1 text-xs text-blue-600 hover:text-blue-800 font-medium focus:outline-none">Bayar &rarr;</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <h3 class="text-lg leading-6 font-medium text-green-700">Riwayat Pembayaran (Lunas)</h3>
+                </div>
+                <ul class="divide-y divide-gray-200 max-h-64 overflow-y-auto">
+                    <li class="px-4 py-4 sm:px-6 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 truncate">Pajak Masa September 2025</p>
+                                <p class="text-xs text-gray-500">Dibayar: 10 Okt 2025</p>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Lunas</span>
+                                <p class="ml-2 text-sm font-bold text-gray-900">Rp 65.000</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="px-4 py-4 sm:px-6 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 truncate">Pajak Masa Agustus 2025</p>
+                                <p class="text-xs text-gray-500">Dibayar: 09 Sep 2025</p>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Lunas</span>
+                                <p class="ml-2 text-sm font-bold text-gray-900">Rp 60.000</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-blue-900 rounded-lg shadow-xl text-white overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-xl font-bold flex items-center">
+                    <svg class="h-6 w-6 mr-2 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Dasar Hukum Pajak UMKM
+                </h2>
+                <div class="mt-4 space-y-3 text-blue-100 text-sm leading-relaxed">
+                    <p>Sesuai dengan <strong>Peraturan Pemerintah (PP) Nomor 23 Tahun 2018</strong>, pelaku Usaha Mikro, Kecil, dan Menengah (UMKM) dengan omset bruto tidak melebihi <strong>Rp 4,8 Miliar</strong> dalam satu tahun pajak, dikenakan Pajak Penghasilan (PPh) Final sebesar <strong>0,5%</strong> dari omset kotor setiap bulannya.</p>
+                    <p><span class="text-accent font-bold">Penting:</span> Pelaporan dan penyetoran pajak dilakukan paling lambat tanggal 15 bulan berikutnya. Keterlambatan dapat dikenakan sanksi administrasi.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center pb-4">
+            <button onclick="toggleHelpModal()" class="group relative w-full sm:w-auto flex justify-center items-center py-3 px-6 border border-transparent text-base font-medium rounded-full text-blue-900 bg-accent hover:bg-yellow-300 shadow-lg transform hover:scale-105 transition-all duration-200 focus:outline-none">
+                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                Butuh Bantuan? Hubungi Admin
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm text-gray-500">
+                &copy; 2025 Pajakku. Zakky Rahman. <br>
+                <span class="text-xs">Dibuat Tugas Workshop Desain Web.</span>
+            </p>
+        </div>
+    </footer>
+
+    <div id="paymentModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="togglePaymentModal()"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+                <div class="absolute top-0 right-0 pt-4 pr-4">
+                    <button type="button" onclick="togglePaymentModal()" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <span class="sr-only">Close</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start justify-center">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-bold text-gray-900 text-center" id="modal-title">
+                                Pindai untuk Bayar (QRIS)
+                            </h3>
+                            <div class="mt-6 flex justify-center">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BayarPajakPajakku75000" alt="QR Code Pembayaran" class="border-4 border-gray-200 rounded-lg">
+                            </div>
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-gray-500">Total Tagihan:</p>
+                                <p class="text-3xl font-extrabold text-primary">Rp 75.000</p>
+                            </div>
+                            <div class="mt-4 p-2 bg-yellow-50 rounded text-xs text-center text-yellow-800">
+                                Scan menggunakan aplikasi e-wallet atau mobile banking apa saja.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="toggleHelpModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                Form Bantuan & Keluhan
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500 mb-4">
+                                    Sampaikan kendala Anda, admin kami akan segera merespons.
+                                </p>
+                                <form id="helpForm">
+                                    <div class="mb-4">
+                                        <label for="subject" class="block text-sm font-medium text-gray-700">Judul Keluhan</label>
+                                        <input type="text" name="subject" id="subject" class="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border p-2" placeholder="Contoh: Perhitungan Pajak Salah">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="description" class="block text-sm font-medium text-gray-700">Jelaskan Masalah Anda</label>
+                                        <textarea id="description" name="description" rows="4" class="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border p-2" placeholder="Ceritakan detail masalahnya disini..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="submitHelp()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
+                        Kirim Laporan
+                    </button>
+                    <button type="button" onclick="toggleHelpModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Batal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleProfile() {
+            const dropdown = document.getElementById('profile-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function togglePaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function toggleHelpModal() {
+            const modal = document.getElementById('helpModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function submitHelp() {
+            const subject = document.getElementById('subject').value;
+            const desc = document.getElementById('description').value;
+
+            if(subject === "" || desc === "") {
+                alert("Harap lengkapi judul dan deskripsi keluhan.");
+                return;
+            }
+
+            alert(`Laporan terkirim!\nJudul: ${subject}\nKami akan menghubungi Anda segera.`);
+            toggleHelpModal();
+            
+            document.getElementById('helpForm').reset();
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('#user-menu-button')) {
+                const dropdown = document.getElementById('profile-dropdown');
+                if (!dropdown.classList.contains('hidden')) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

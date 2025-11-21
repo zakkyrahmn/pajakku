@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Pajakku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af', // Biru
+                        accent: '#facc15',  // Kuning
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen font-sans text-gray-800">
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-10 w-auto" src="img/logo.png" alt="Logo Pajakku">
+                    <span class="ml-3 font-bold text-xl text-primary hidden sm:block">Pajakku</span>
+                </div>
+                <div>
+                    <a href="index.html" class="text-gray-500 hover:text-primary font-medium transition">
+                        &larr; Kembali ke Beranda
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+            
+            <div class="bg-primary px-8 py-6 text-center">
+                <h2 class="text-2xl font-bold text-white">Selamat Datang</h2>
+                <p class="text-blue-200 mt-1">Silakan masuk untuk kelola pajak UMKM</p>
+            </div>
+
+            <div class="p-8">
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="mb-5">
+                        <label for="idumkm" class="block text-sm font-medium text-gray-700 mb-1">ID UMKM (8 Digit)</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                                </svg>
+                            </div>
+                            <input type="text" id="idumkm" name="idumkm" maxlength="8" required
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                                placeholder="12345678" pattern="\d{8}" title="Harus 8 digit angka">
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                                placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <button type="submit" 
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-blue-900 bg-accent hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-200">
+                        MASUK
+                    </button>
+                </form>
+
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Khusus Petugas</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <a href="admin.html" class="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            Masuk sebagai Admin
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-8 rounded-md bg-blue-50 p-4 border border-blue-100">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3 flex-1">
+                            <p class="text-sm text-blue-800 font-medium">
+                                Belum memiliki akun ID UMKM?
+                            </p>
+                            <div class="mt-1 text-sm text-blue-700">
+                                Silahkan lakukan pendaftaran secara langsung di <b>Kantor Pelayanan Pajak (KPP)</b> terdekat di kota Anda.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t py-6">
+        <p class="text-center text-sm text-gray-500">
+            &copy; 2025 Pajakku. Zakky Rahman
+        </p>
+    </footer>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault(); // Mencegah reload halaman
+            
+            const idUmkm = document.getElementById('idumkm').value;
+            const password = document.getElementById('password').value;
+
+            // Validasi sederhana 8 digit
+            if(idUmkm.length !== 8 || isNaN(idUmkm)) {
+                alert("ID UMKM harus terdiri dari 8 digit angka.");
+                return;
+            }
+
+            if(password === "") {
+                alert("Password tidak boleh kosong.");
+                return;
+            }
+
+            // Redirect ke user.html
+            window.location.href = 'user.html';
+        }
+    </script>
+
+</body>
+</html>

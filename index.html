@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pajakku - Solusi Pajak UMKM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af', // Biru (blue-800 basis)
+                        accent: '#facc15',  // Kuning (yellow-400 basis)
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling untuk navigasi internal jika dibutuhkan */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+   <header class="bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-64 text-center relative z-10">
+            <div class="flex justify-center mb-6">
+                <img src="img/logo.png" alt="Logo Pajakku" class="h-24 w-auto object-contain">
+            </div>
+            
+            <h1 class="text-4xl tracking-tight font-extrabold text-primary sm:text-5xl md:text-6xl">
+                Pajakku
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                Solusi praktis hitung dan kelola pajak UMKM. <br>
+                <span class="text-primary font-semibold">Mudah, Cepat, dan Sesuai Aturan PP 23/2018.</span>
+            </p>
+            
+            <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                <a href="#kalkulator" class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-blue-700 md:py-4 md:text-lg md:px-10 shadow-lg transition duration-300">
+                    Hitung Pajak Sekarang
+                </a>
+                <a href="login.html" class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-900 bg-accent hover:bg-yellow-300 md:py-4 md:text-lg md:px-10 shadow-md transition duration-300">
+                    Masuk
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full z-0">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f6" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+    </header>
+
+    <section class="py-12 bg-gray-100" id="aturan">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-primary">Ketentuan Pajak UMKM</h2>
+                <p class="mt-2 text-lg text-gray-600">Berdasarkan PP 23 Tahun 2018</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-primary mb-4 text-2xl font-bold mx-auto">
+                        %
+                    </div>
+                    <h3 class="text-lg font-medium text-center text-gray-900">Tarif Final 0.5%</h3>
+                    <p class="mt-2 text-center text-gray-500">
+                        Dikenakan dari total omset bruto per bulan. Cukup bayar, lapor, dan selesai.
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-accent">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-100 text-yellow-700 mb-4 text-2xl font-bold mx-auto">
+                        Rp
+                    </div>
+                    <h3 class="text-lg font-medium text-center text-gray-900">Batas Omset</h3>
+                    <p class="mt-2 text-center text-gray-500">
+                        Berlaku bagi UMKM dengan omset tidak melebihi Rp 4,8 Miliar dalam satu tahun pajak.
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-primary">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-primary mb-4 text-2xl font-bold mx-auto">
+                        ID
+                    </div>
+                    <h3 class="text-lg font-medium text-center text-gray-900">Wajib NPWP</h3>
+                    <p class="mt-2 text-center text-gray-500">
+                        Wajib Pajak harus memiliki NPWP dan melakukan pencatatan omset bulanan sederhana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white" id="kalkulator">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-blue-50 rounded-2xl shadow-xl overflow-hidden">
+                <div class="p-8 md:p-12">
+                    <h2 class="text-3xl font-extrabold text-primary text-center mb-8">Kalkulator Pajak UMKM</h2>
+                    
+                    <form id="taxForm" class="space-y-6">
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                            <div>
+                                <label for="status" class="block text-sm font-medium text-gray-700">Status Wajib Pajak</label>
+                                <select id="status" name="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border">
+                                    <option value="perorangan">Orang Pribadi</option>
+                                    <option value="badan">Badan Usaha (CV/PT)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="omset" class="block text-sm font-medium text-gray-700">Omset Bulan Ini (Rp)</label>
+                                <input type="number" name="omset" id="omset" placeholder="Contoh: 10000000" class="mt-1 block w-full pl-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary sm:text-sm" required>
+                            </div>
+                        </div>
+                        
+                        <button type="button" onclick="hitungPajak()" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            Hitung Pajak Saya
+                        </button>
+                    </form>
+
+                    <div id="result" class="mt-8 hidden bg-white p-6 rounded-lg border border-gray-200 animate-fade-in-up">
+                        <h3 class="text-lg font-medium text-gray-900">Hasil Perhitungan:</h3>
+                        <dl class="mt-4 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Omset</dt>
+                                <dd class="mt-1 text-2xl font-bold text-gray-900" id="displayOmset">Rp 0</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Pajak Final (0.5%)</dt>
+                                <dd class="mt-1 text-3xl font-bold text-primary" id="displayPajak">Rp 0</dd>
+                            </div>
+                        </dl>
+                        <div class="mt-6 border-t border-gray-200 pt-4">
+                            <p class="text-sm text-gray-600">
+                                <span class="font-bold text-accent">Rekomendasi:</span> Segera buat kode billing dan bayar sebelum tanggal 15 bulan depan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Panduan Singkat</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-accent flex items-center justify-center text-white font-bold text-xs">1</div>
+                            <p class="ml-4 text-base text-gray-600">Daftar NPWP secara online di ereg.pajak.go.id</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-accent flex items-center justify-center text-white font-bold text-xs">2</div>
+                            <p class="ml-4 text-base text-gray-600">Hitung omset setiap bulan (Gunakan kalkulator di atas).</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-accent flex items-center justify-center text-white font-bold text-xs">3</div>
+                            <p class="ml-4 text-base text-gray-600">Bayar pajak 0.5% via Bank/Pos.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-4">Dokumen Penting</h3>
+                    <div class="space-y-3">
+                        <a href="#" class="block p-4 bg-white border rounded-md hover:shadow-md transition flex justify-between items-center">
+                            <span class="text-gray-700">📥 Template Pembukuan Sederhana (Excel)</span>
+                            <span class="text-xs text-blue-500 font-semibold">Unduh</span>
+                        </a>
+                        <a href="#" class="block p-4 bg-white border rounded-md hover:shadow-md transition flex justify-between items-center">
+                            <span class="text-gray-700">📄 PDF Peraturan PP 23/2018</span>
+                            <span class="text-xs text-blue-500 font-semibold">Unduh</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-base text-white">
+                &copy; 2025 Pajakku. Zakky Rahman
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function hitungPajak() {
+            // Ambil nilai input
+            const omset = document.getElementById('omset').value;
+            
+            if(omset === "" || omset < 0) {
+                alert("Mohon masukkan jumlah omset yang valid.");
+                return;
+            }
+
+            // Hitung 0.5%
+            const pajak = omset * 0.005;
+
+            // Format Rupiah
+            const formatRupiah = (angka) => {
+                return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(angka);
+            };
+
+            // Tampilkan hasil
+            document.getElementById('displayOmset').innerText = formatRupiah(omset);
+            document.getElementById('displayPajak').innerText = formatRupiah(pajak);
+            
+            // Munculkan div hasil
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
